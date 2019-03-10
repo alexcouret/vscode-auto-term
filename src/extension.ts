@@ -1,6 +1,9 @@
 import * as vscode from 'vscode';
 import * as fs from "fs";
 
+/**
+ * Get an array of terminal configurations for a given folder.
+ */
 const getTermsToOpen = (folder: string): vscode.TerminalOptions[] => {
 	const { rootPath } = vscode.workspace;
 	const config = vscode.workspace.getConfiguration('autoTerm');
@@ -13,17 +16,12 @@ const getTermsToOpen = (folder: string): vscode.TerminalOptions[] => {
 
 	const base_folder = `${rootPath}/${folder}`;
 
-	// Default config, open a terminal at the root of the folder.
+	// Default config, open 1 terminal at the root of the folder.
 	if (!folder_term_paths.hasOwnProperty(folder)) {
 		return [{
 			name: folder,
 			cwd: base_folder
 		}];
-	}
-
-	let folder_map = folder_term_paths[folder];
-	if (!Array.isArray(folder_map)) {
-		folder_map = [folder_map];
 	}
 
 	return folder_term_paths[folder].map((subfolder_path: string) => ({
@@ -32,6 +30,9 @@ const getTermsToOpen = (folder: string): vscode.TerminalOptions[] => {
 	}));
 };
 
+/**
+ * Open all the terminal tabs for the current workspace.
+ */
 const openTerminals = async () => {
 	const { rootPath } = vscode.workspace;
 
@@ -40,18 +41,16 @@ const openTerminals = async () => {
 	}
 
 	const workspace_folders = await fs.promises.readdir(rootPath);
+
 	workspace_folders.forEach(folder => {
 		const terms_to_open = getTermsToOpen(folder);
 		terms_to_open.forEach(vscode.window.createTerminal);
 	});
 };
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 	const disposable = vscode.commands.registerCommand('extension.autoTerm', openTerminals);
 	context.subscriptions.push(disposable);
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() {}
