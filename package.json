@@ -3,6 +3,11 @@
 	"displayName": "Auto Term",
 	"description": "Automatically open terminal tabs based on open files",
 	"version": "1.0.0",
+	"publisher": "alexandre-couret",
+	"repository": {
+		"type": "GitHub",
+		"url": "https://github.com/OzoTek/vscode-auto-term"
+	},
 	"engines": {
 		"vscode": "^1.32.0"
 	},
