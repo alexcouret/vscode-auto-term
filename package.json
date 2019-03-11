@@ -2,7 +2,7 @@
 	"name": "auto-term",
 	"displayName": "Auto Term",
 	"description": "Automatically open terminal tabs based on open files",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"publisher": "alexandre-couret",
 	"repository": {
 		"type": "GitHub",
@@ -19,10 +19,12 @@
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
-		"commands": [{
-			"command": "extension.autoTerm",
-			"title": "Auto Term"
-		}],
+		"commands": [
+			{
+				"command": "extension.autoTerm",
+				"title": "Auto Term"
+			}
+		],
 		"configuration": {
 			"type": "object",
 			"title": "Auto Term configuration.",
