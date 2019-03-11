@@ -27,7 +27,3 @@ This extension contributes the following settings:
   ```
     "autoTerm.excludeFolders": ['folder-to-exclude']
   ```
-
-### 1.0.0
-
-Initial release Auto Term.
