@@ -1,26 +1,21 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 
-import { getTermsToOpen } from "./utils";
+import { getTermsToOpen, getWorkspaceFolderUris } from "./utils";
 
 /**
  * Open all the terminal tabs for the current workspace.
  */
 const openTerminals = () => {
-	const { rootPath } = vscode.workspace;
+	const workspace_folder_uris = getWorkspaceFolderUris();
 
-	if (!rootPath) {
+	if (!workspace_folder_uris.length) {
 		return;
 	}
 
-	fs.readdir(rootPath, (err, folders) => {
-		if (err) {
-			return;
-		}
-		folders.forEach(folder => {
-			const terms_to_open = getTermsToOpen(folder);
-			terms_to_open.forEach(vscode.window.createTerminal);
-		});
+	workspace_folder_uris.forEach((folder_uri) => {
+		const terms_to_open = getTermsToOpen(folder_uri);
+		terms_to_open.forEach(vscode.window.createTerminal);
 	});
 };
 

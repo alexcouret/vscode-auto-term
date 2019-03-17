@@ -18,28 +18,29 @@ const _getConfig = (): Config => {
 /**
  * Get an array of terminal configurations for a given folder.
  */
-const getTermsToOpen = (folder: string): vscode.TerminalOptions[] => {
-  const { rootPath } = vscode.workspace;
+const getTermsToOpen = (folder_uri: vscode.Uri): vscode.TerminalOptions[] => {
+  const {
+    fsPath: folder_path
+  } = folder_uri;
+  const folder_name = folder_path.split('/').pop() as string;
   const { exclude_folders, folder_term_paths } = _getConfig();
   const open_terms = _getAlreadyOpenedTerms();
 
-  if (!rootPath || folder.startsWith('.') || exclude_folders.includes(folder)) {
+  if (folder_name.startsWith('.') || exclude_folders.includes(folder_name)) {
     return [];
   }
 
-  const folder_path = `${rootPath}/${folder}`;
-
   // Default config, open 1 terminal at the root of the folder.
-  if (!folder_term_paths.hasOwnProperty(folder)) {
-    return open_terms.has(folder)
+  if (!folder_term_paths.hasOwnProperty(folder_name)) {
+    return open_terms.has(folder_name)
       ? []
       : [{
-        name: folder,
+        name: folder_name,
         cwd: folder_path,
       }];
   }
 
-  return folder_term_paths[folder]
+  return folder_term_paths[folder_name]
     .map((subfolder_path: string) => ({
       name: subfolder_path.split('/').pop(),
       cwd: `${folder_path}/${subfolder_path}`,
@@ -47,4 +48,10 @@ const getTermsToOpen = (folder: string): vscode.TerminalOptions[] => {
     .filter(({ name }) => !open_terms.has(name as string));
 };
 
-export { getTermsToOpen };
+const getWorkspaceFolderUris = (): vscode.Uri[] => {
+  const { workspaceFolders = [] } = vscode.workspace;
+
+  return workspaceFolders.map(({ uri }) => uri);
+};
+
+export { getTermsToOpen, getWorkspaceFolderUris };
