@@ -10,3 +10,7 @@
 
 - FIX: Run extension at startup.
 - Check open terminals to not open twice the same terms.
+
+## [1.0.2]
+
+- FIX: Was openning wrong folders
