@@ -1,59 +1,60 @@
 {
-	"name": "auto-term",
-	"displayName": "Auto Term",
-	"description": "Automatically open terminal tabs based on open files",
-	"version": "1.0.3",
-	"publisher": "alexandre-couret",
-	"repository": {
-		"type": "GitHub",
-		"url": "https://github.com/OzoTek/vscode-auto-term"
-	},
-	"engines": {
-		"vscode": "^1.32.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-		"*"
-	],
-	"main": "./dist/extension.js",
-	"contributes": {
-		"commands": [
-			{
-				"command": "extension.autoTerm",
-				"title": "Auto Term"
-			}
-		],
-		"configuration": {
-			"type": "object",
-			"title": "Auto Term configuration.",
-			"properties": {
-				"autoTerm.folderTermPaths": {
-					"description": "Specify a <folder: subfolderPaths[]> map to open one or multiple terminals with different paths for a given folder.",
-					"type": "object",
-					"default": {}
-				},
-				"autoTerm.excludeFolders": {
-					"description": "List of folders to exclude.",
-					"type": "array",
-					"default": []
-				}
-			}
-		}
-	},
-	"scripts": {
-		"vscode:prepublish": "yarn run compile",
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"postinstall": "node ./node_modules/vscode/bin/install",
-		"test": "yarn run compile && node ./node_modules/vscode/bin/test"
-	},
-	"devDependencies": {
-		"typescript": "^3.3.1",
-		"vscode": "^1.1.28",
-		"tslint": "^5.12.1",
-		"@types/node": "^10.12.21",
-		"@types/mocha": "^2.2.42"
-	}
+  "name": "auto-term",
+  "displayName": "Auto Term",
+  "description": "Automatically open terminal tabs based on open files",
+  "version": "1.0.3",
+  "icon": "./icon.png",
+  "publisher": "alexandre-couret",
+  "repository": {
+    "type": "GitHub",
+    "url": "https://github.com/OzoTek/vscode-auto-term"
+  },
+  "engines": {
+    "vscode": "^1.32.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.autoTerm",
+        "title": "Auto Term"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Auto Term configuration.",
+      "properties": {
+        "autoTerm.folderTermPaths": {
+          "description": "Specify a <folder: subfolderPaths[]> map to open one or multiple terminals with different paths for a given folder.",
+          "type": "object",
+          "default": {}
+        },
+        "autoTerm.excludeFolders": {
+          "description": "List of folders to exclude.",
+          "type": "array",
+          "default": []
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "yarn run compile && node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "typescript": "^3.3.1",
+    "vscode": "^1.1.28",
+    "tslint": "^5.12.1",
+    "@types/node": "^10.12.21",
+    "@types/mocha": "^2.2.42"
+  }
 }
