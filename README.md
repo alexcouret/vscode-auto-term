@@ -1,4 +1,4 @@
-# auto-term README
+# Auto Term
 
 Automatically open terminal tabs based on open files.
 This is useful when working with a multi-folder workspace.
@@ -7,6 +7,7 @@ It makes it faster to run shell commands without having to leave VSCode, or open
 ## Features
 
 - Automatically open integrated terminal tab(s) for each folder within your multi-root workspace.
+- Automatically clean integreated terminal tab(s) that were not opened by Auto Term.
 
 ## Extension Settings
 
