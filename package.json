@@ -2,7 +2,7 @@
   "name": "auto-term",
   "displayName": "Auto Term",
   "description": "Automatically open terminal tabs based on open files",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "icon": "./icon.png",
   "publisher": "alexandre-couret",
   "repository": {
