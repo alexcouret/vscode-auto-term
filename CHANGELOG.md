@@ -19,6 +19,6 @@
 
 - Add icon
 
-## [1.0.6]
+## [1.1.0]
 
 - [ADD]: `cleanOtherTerms` option: Clean all terminals not open by Auto Term.
