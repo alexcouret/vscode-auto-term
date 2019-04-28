@@ -14,3 +14,7 @@
 ## [1.0.2]
 
 - FIX: Was openning wrong folders
+
+## [1.0.4]
+
+- Add icon
