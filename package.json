@@ -3,7 +3,7 @@
   "displayName": "Auto Term",
   "description": "Automatically open terminal tabs based on open files",
   "version": "1.0.4",
-  "icon": "./icon.png",
+  "icon": "icon.png",
   "publisher": "alexandre-couret",
   "repository": {
     "type": "GitHub",
