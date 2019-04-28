@@ -39,6 +39,11 @@
           "description": "List of folders to exclude.",
           "type": "array",
           "default": []
+        },
+        "autoTerm.cleanOtherTerms": {
+          "description": "Clean all terminals not opened by Auto Term.",
+          "type": "boolean",
+          "default": false
         }
       }
     }

@@ -15,6 +15,10 @@
 
 - FIX: Was openning wrong folders
 
-## [1.0.4]
+## [1.0.5]
 
 - Add icon
+
+## [1.0.6]
+
+- [ADD]: `cleanOtherTerms` option: Clean all terminals not open by Auto Term.

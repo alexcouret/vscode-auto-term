@@ -12,9 +12,10 @@ It makes it faster to run shell commands without having to leave VSCode, or open
 
 This extension contributes the following settings:
 
-* `autoTerm.folderTermPaths`:
+- `autoTerm.folderTermPaths`:
   Specify a list of subfolders for each of your folders to open tabs at specific paths.
   For instance, if you have a `repo` folder containing two subfolders `sub1` and `sub2` in your workspace, you can have you config setup like this to open 1 tab per subfolder:
+
   ```
    "autoTerm.folderTermPaths": {
     "repo": [
@@ -22,8 +23,16 @@ This extension contributes the following settings:
       "sub2"
     ]
   ```
-* `autoTerm.excludeFolders`: List of folder names to exclude. (By default, only folders starting with `.` are excluded)
+
+- `autoTerm.excludeFolders`: List of folder names to exclude. (By default, only folders starting with `.` are excluded)
   Example:
+
   ```
     "autoTerm.excludeFolders": ['folder-to-exclude']
   ```
+
+- `autoTerm.cleanOtherTerms`: Clean all terminals not opened by Auto Term. (`false` by default)
+
+```
+  "autoTerm.cleanOtherTerms": true
+```
