@@ -11,5 +11,6 @@ export default class ExtensionManager {
   run() {
     this.autoTerm.open();
     this.autoTerm.clean();
+    this.autoTerm.watchWorkspaceChanges();
   }
 }

@@ -1,58 +1,63 @@
 import * as vscode from "vscode";
 
-const getUserConfig = (): Config => {
+import type { Config, ExcludeFolders, FolderTermPaths } from "./types/config";
+
+export const getUserConfig = (): Config => {
   const config = vscode.workspace.getConfiguration("autoTerm");
-  const exclude_folders: ExcludeFolders = config.get("excludeFolders", []);
-  const folder_term_paths: FolderTermPaths = config.get("folderTermPaths", {});
-  const clean_other_terms: boolean = config.get("cleanOtherTerms", false);
+  const excludeFolders: ExcludeFolders = config.get("excludeFolders", []);
+  const folderTermPaths: FolderTermPaths = config.get("folderTermPaths", {});
+  const cleanOtherTerms: boolean = config.get("cleanOtherTerms", false);
+  const watchWorkspaceChanges: boolean = config.get(
+    "watchWorkspaceChanges",
+    true,
+  );
 
   return {
-    exclude_folders,
-    folder_term_paths,
-    clean_other_terms
+    excludeFolders,
+    folderTermPaths,
+    cleanOtherTerms,
+    watchWorkspaceChanges,
   };
 };
 
 /**
  * Get an array of terminal configurations for a given folder.
  */
-const getTermsToOpen = (
-  folder_uri: vscode.Uri,
-  user_config: Config
+export const getTermsToOpen = (
+  folderUri: vscode.Uri,
+  userConfig: Config,
 ): vscode.TerminalOptions[] => {
-  const { fsPath: folder_path } = folder_uri;
-  const folder_name = folder_path.split("/").pop() as string;
-  const { exclude_folders, folder_term_paths } = user_config;
-  const open_terms = vscode.window.terminals.map(({ name }) => name);
+  const { fsPath: folderPath } = folderUri;
+  const folderName = folderPath.split("/").pop() as string;
+  const { excludeFolders, folderTermPaths } = userConfig;
+  const openTerms = vscode.window.terminals.map(({ name }) => name);
 
-  if (folder_name.startsWith(".") || exclude_folders.includes(folder_name)) {
+  if (folderName.startsWith(".") || excludeFolders.includes(folderName)) {
     return [];
   }
 
   // Default config, open 1 terminal at the root of the folder.
-  if (!folder_term_paths.hasOwnProperty(folder_name)) {
-    return open_terms.includes(folder_name)
+  if (!folderTermPaths.hasOwnProperty(folderName)) {
+    return openTerms.includes(folderName)
       ? []
       : [
           {
-            name: folder_name,
-            cwd: folder_path
-          }
+            name: folderName,
+            cwd: folderPath,
+          },
         ];
   }
 
-  return folder_term_paths[folder_name]
-    .map((subfolder_path: string) => ({
-      name: subfolder_path.split("/").pop(),
-      cwd: `${folder_path}/${subfolder_path}`
+  return folderTermPaths[folderName]
+    .map((subfolderPath: string) => ({
+      name: subfolderPath.split("/").pop(),
+      cwd: `${folderPath}/${subfolderPath}`,
     }))
-    .filter(({ name }) => !open_terms.includes(name as string));
+    .filter(({ name }) => !openTerms.includes(name as string));
 };
 
-const getWorkspaceFolderUris = (): vscode.Uri[] => {
+export const getWorkspaceFolderUris = (): vscode.Uri[] => {
   const { workspaceFolders = [] } = vscode.workspace;
 
   return workspaceFolders.map(({ uri }) => uri);
 };
-
-export { getTermsToOpen, getWorkspaceFolderUris, getUserConfig };
